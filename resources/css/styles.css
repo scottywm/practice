@@ -1,0 +1,641 @@
+/*-------------------------------------*/
+/*             BASIC SETUP             */
+/*-------------------------------------*/
+
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;  /* If you set box-sizing: border-box; on an element, padding and border are included in the width and height: */
+}
+
+html {
+    background-color: #fff;
+    color: #555;
+    font-family: 'lato', 'Arial', sans-serif;
+    font-size: 20px;
+    font-weight: 300;
+    text-rendering: optimizeLegibility; 
+    overflow-x: hidden;
+}
+
+
+/* text-rendering: optimizeLegibility is used when the text is rendered we can tell the document how we want to render the text.
+In this case we are telling the document to prioritise ligatures and kerning requirements
+so that the text reads easier and look better. Ligatures are when some letters are
+put next to one another (ff, fl fi ect) they look tricky to read and kerning is simply
+the spacing between each letter */
+
+/*.clearfix {zoom: 1}*/ /* the lecturer included this in his lecture but I left it out as I didn't notice it change anything */
+.clearfix:after { /* this whole code pushes down the content as the floating that was done has lifted up all the content slightly so we need to push it back down again */
+    content: "ooooh shit yeah!!!!!!!!!!"; /* first we create some content "after" all the elements that used a float and lifted up the other content below it */
+    height: 0; /* now that we have created content we give it properties and we set the hieght to 0 as we dont want it to appear on the screen and seperate the elements its between */
+    visibility: hidden; /* we set the visibility to hidden so the content is not seen */
+    display: block; /* we set the display to block as this is this enables us to manipulate it and it takes up a whole row on the screen */
+    clear: both; /* now that we have created content and set it up to how we want we can now use "clear: both" on this newly created content 
+                    as this will clear any effects a left or a right float would have had on the document starting "after" the 
+                    element this ".clearfix" class is appliet to. */
+}
+
+/*-------------------------------------*/
+/*         REUSABLE COMPONENTS         */
+/*-------------------------------------*/
+
+.row {
+    max-width: 1140px;
+    margin: 0 auto; /*this centers the element */
+}
+
+section {
+    padding: 80px 0;
+}
+
+.box {
+    padding: 1%; /* a padding of 1% of the width of the containing element */
+}
+
+/*----------------HEADINGS----------------*/
+
+h1, h2 {
+    font-weight: 300;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    
+}
+
+h1 {
+    margin-top: 0;
+    margin-bottom: 20px;
+    color: #fff;
+    font-size: 240%;
+    word-spacing: 4px;
+    letter-spacing: 1px;
+}
+
+h2 {
+    font-size: 180%;
+    word-spacing: 2px;
+    text-align: center;
+    margin-bottom: 30px;
+    letter-spacing: 1px;
+}
+
+h3 {
+    font-size: 110%;
+    font-weight: 300;
+    margin-bottom: 15px;;
+    text-transform: uppercase;
+}
+
+h2:after { /* after the content inside the h2 title (<h2>Get food fast &mdash; not fast food.</h2>) this css will apply */
+    display: block;
+    height: 2px;
+    background-color: #e67e22;
+    content: " "; /* you must include this property which tells the document whats going to be inside the element, otherwise the after method wont work */
+    width: 100px;
+    margin: 30px auto 0 auto; /* 30px from the top, automatically adjusted on the left, 0px on the bottom and automatically adjusted on the left and this centers the element */
+    /*margin-top: 30px;*/
+}
+
+/*----------------PARAGRAPHS------------------*/
+
+.long-copy { /* the width, margin-left and margin-right properties are used to center the element */
+    line-height: 145%;
+    width: 70%; /* this makes the width of the element 70% of the width of its parent element */
+    margin-left: 15%; /* there is 30% left over in width space inside the parent element as the element has taken 70% in width so 15% is allocated to the left margin  */
+    margin-right: 15%; /* the other 15% is taken by the right margin and thus the element has been centered */
+}
+
+.box p {
+    font-size: 90%;
+    line-height: 145%;
+}
+
+/*------------------ICONS---------------------*/
+
+.menu-con {
+    display: none;
+    position: absolute;
+    top: 5%;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+.menu-con #bar1 {
+    height: 5px;
+    width: 45px;
+    background-color: white;
+    transform: translateY(-8px);
+}
+
+.menu-con #bar2 {
+    height: 5px;
+    width: 45px;
+    background-color: white;
+}
+
+.menu-con #bar3 {
+    height: 5px;
+    width: 45px;
+    background-color: white;
+    transform: translateY(8px);
+}
+
+.icon-big {
+    font-size: 250%;
+    display: block;
+    color: #e67e22;
+    margin-bottom: 20px;
+}
+.cross {
+    font-size: 120px;
+    color: white;
+    display: none;
+    margin: 0 auto;
+    z-index: 1;
+    position: absolute;
+    left: 50%;
+    transform: translate(-50%);
+}
+
+/*-------------------LINKS--------------------*/
+
+.city-feature a,
+.city-feature a:visited
+/* .footer-nav li a, 
+.social-links li a */{
+    color: #e67e22;
+    text-decoration: none;
+    padding-bottom: 1px;
+    border-bottom: 1px solid #e67e22;
+    transition: border-bottom 0.2s, color 0.2s;
+}
+
+.city-feature a:hover,
+.city-feature a:active {
+    color: #555;
+    border-bottom: 1px solid transparent;
+}
+
+/*-----------------BUTTONS--------------------*/
+
+
+
+.btn:link, .btn:visited, input[type=submit] { /* visited means that the given css will apply after the button has been clicked and link is the css that will apply before the button is clicked */
+    display: inline-block; /* the <a> element is by default an inline element which means that its size depends on whats inside it and we cannont manipulate it manualy. A block element takes up an entire row on its own and its size can be manipulated manually so an inline-block element has both properties of an inline element and a block element in that it will be positioned in-line and its size can be manipulated by us */
+    padding: 10px 30px;
+    font-weight: 300;
+    text-decoration: none; /* <a> elements by default underline the text inside them, so this will remove that underline */
+    border-radius: 200px;
+    border: 1px solid #e67e22;
+    transition: background-color 0.2s, border 0.2s, color 0.2s;
+}
+
+.btn-full:link, input[type=submit], .btn-full:visited {
+    background-color: #e67e22;
+    border: 1px solid #e67e22;
+    color: #fff;
+    margin-right: 15px;
+}
+
+.btn-ghost:link, .btn-ghost:visited {
+    color: #e67e22;
+    border: 1px solid #e67e22;
+}
+
+.btn:hover, .btn:active, input[type=submit]:hover, input[type=submit]:active {
+    background-color: #ac5911;
+}
+
+.btn-full:hover, .btn-full:active {
+    border: 1px solid #e67e22;
+}
+
+.btn-ghost:hover, .btn-ghost:active {
+    color: #fff;
+    border: 1px solid #e67e22;
+}
+
+/*-------------------------------------*/
+/*               HEADER                */
+/*-------------------------------------*/
+
+header {
+    background-image: linear-gradient(rgba(0, 0, 0, 0.70), rgba(0, 0, 0, 0.70)), url("images/hero.jpg"); /* the linear gradient puts a colour over the top of the url image we included and it has been given two arguments the first is the strating color and the second is the colour that it will transition in starting from top to bottom, the reason why the image is the same dark colour is because bothe the starting and ending colour are the same */
+    height: 100vh;  /* this sets the height of the image to 100% of the screen height or view height */
+    background-size: cover; /* this makes the image cover the entire element */
+    background-position: center; /* this makes the image positioned in the center of the element */
+    background-attachment: fixed; /* this keeps the image fixed in the same place on the screen as the page scrolls up and down the parent element moves and and down with the page but the image stays fixed in the same place */
+}
+
+.hero-text-box {
+    position: absolute; /* we set the property to absolute so we can manipulate its position from the top and left as below. If there is a parent element that has the setting "position: absolute;", then the position of the element will be positioned relative to its parent element but in our case there is no parent element with such a setting the the element is positioned relative to the screen*/
+    width: 1140px;
+    top: 50%; /* we shift the element to a distance of 50% of the screen height away from the top of the screen */
+    left: 50%; /*we shift the element 50% of the screens width to the left so the left side of the element is 50% away from the left side */
+    transform: translate(-50%, -50%);/* here we center the element both vertically and horizontaly as this shifts the element 50% of the elements width to left and 50% of the elements height to the upwards direction */
+}
+
+.logo {
+    height: 100px;
+    width: auto; /* after we set the height to 100px above the width will automaticaly be set */
+    float: left; /* this pushes the entire img element to the left */
+    margin-top: 20px;
+}
+
+.circle {
+    height: 0;
+    width: 0;
+    background-color: rgb(41, 35, 35);
+    border-radius: 50%;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    transition: height 0.3s, width 0.3s;
+}
+
+.main-nav {
+    float: right; /* this pushes the entire ul element to the right */
+    list-style: none; /* this removes the bullet points next to the li elements inside the parent element */
+    margin-top: 60px;
+}
+
+.main-nav-two {
+    visibility: hidden;
+}
+
+.main-nav-two li a {
+    text-decoration: none;
+    color: white;
+}
+
+.main-nav-two li {
+    list-style: none;
+    margin-top: 30px;
+}
+
+.main-nav-two li a {
+    padding: 2px;
+}
+
+.main-nav-two li a:hover, .main-nav-two li a:active {
+    border-bottom: 2px solid #e67e22;
+    border-width: 100%;
+}
+
+.main-nav li {
+    display: inline-block;
+    margin-left: 40px;
+}
+
+.main-nav li a:link, .main-nav li a:visited {
+    padding: 8px 0px;
+    color: #fff;
+    text-decoration: none;
+    text-transform: uppercase;
+    font-size: 90%; /* this was calculated by 18/20 because 20px is the standard we set for all font sizes and since we want 18px we must find what percentage it is of 20px */
+    border-bottom: 2px solid transparent;
+    transition: border-bottom 0.2s;
+    word-spacing: 4px;
+    letter-spacing: 2px;
+}
+
+.main-nav li a:hover {
+    border-bottom: 2px solid #e67e22;
+}
+
+/*-------------------------------------*/
+/*           FEATUREAS                 */
+/*-------------------------------------*/
+
+.long-copy {
+    margin-bottom: 30px;
+}
+
+/*-------------------------------------*/
+/*               MEALS                 */
+/*-------------------------------------*/
+
+.meals-showcase {
+    list-style: none;
+    width: 100%;
+}
+
+.meals-showcase li {
+    display: block;
+    float: left;
+    width: 25%;
+}
+
+.meal-photo {
+    background-color: black;
+    width: 100%;
+    margin: 0;
+    overflow: hidden; /*this stops the image from inside this element from overflowing out of this element which is the images parent container*/
+}
+
+.meal-photo img {
+    opacity: 0.70;
+    width: 100%;
+    height: auto;
+    transform: scale(1.15); /* the image is set to 1.15 times its original size */
+    transition: transform 0.5s, opacity 0.5s;
+}
+
+.section-meals {
+    padding: 0;
+}
+
+.meal-photo img:hover {
+    opacity: 1;
+    transform: scale(1.03) /* when we hover over the original image the size of the image is set to 1.03 times its original size */
+}
+
+/*---------------------------------------*/
+/*              HOW IT WORKS             */
+/*---------------------------------------*/
+
+.span-1-of-2 {
+	width: 49.2%;
+}
+
+.section-steps {
+    background-color: rgb(228, 226, 226);
+}
+
+.steps-box:first-child {
+    text-align: right;
+    padding-right: 3%;
+    margin-top: 30px;
+}
+
+.steps-box:last-child {
+    padding-left: 3%;
+    margin-top: 70px;
+}
+
+.app-screen {
+    width: 40%;
+    height: auto;
+}
+
+.works-step {
+    margin-bottom: 50px;
+}
+
+.works-step:last-of-type {
+    margin-bottom: 80px;
+}
+
+.works-step div {
+    color: #e67e22;
+    border: 2px solid #e67e22;
+    display: inline-block; /* this makes the div element go directly around the number inside it like a square */
+    border-radius: 50%; /*this makes the div turn into a circle*/
+    height: 55px;
+    width: 55px;
+    text-align: center; /* this centers the number inside the div horizontally */
+    padding-top: 5px; /* this makes the numbers inside the div elements 5px from the top of the div elements */
+    padding-bottom: 5px; /* this makes the numbers inside the div elements 5px from the bottom to vertically center it as is already 5px away from the top of the div. */
+    float: left; /* this pushes the div element all the way to the left to enable the <p> element to sit next to the div element even though the <p> elements default setting is "display: block"  */
+    font-size: 150%;
+    margin-right: 25px;
+}
+
+.btn-app img { /* this makes each of the apple and google play buttons the same size */
+    height: 50px; 
+    width: auto;
+    margin-right: 10px;
+}
+
+/*--------------------------------------*/
+/*                 CITIES               */
+/*--------------------------------------*/
+
+.box img {
+    width: 100%; /* we must set the width of the image to 100% of the width of its */
+    height: auto; /* parent element because we want the whole image to be inside the parent element and to not distort the parent */
+    margin-bottom: 15px;  /* element as would be the case */
+}
+
+.city-feature {
+    margin-bottom: 5px
+}
+
+.icon-small {
+    display: inline-block;
+    width: 30px;
+    color: #e67e22;
+    /* text-align: center; */ /* this is used to set the position of text inside an element and we dont need it but they included it in the video */
+    vertical-align: middle; /* we place the element in the verticle middle of its parent element */
+    margin-top: -4px; /* when we give a negative margin we lift the element up */
+}
+
+/*-------------------------------------*/
+/*            TESTIMONIALS             */
+/*-------------------------------------*/
+
+.section-testimonials {
+    background-image: linear-gradient(rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.7)), url("images/back-customers.jpg");
+    background-size: cover;
+    background-attachment: fixed;
+    color: white;
+}
+
+blockquote {
+    padding: 2%;
+    font-style: italic;
+    line-height: 145%; /* makes the height of each line of text 145% heigher */
+    position: relative; /* By setting the positin to relative and the inside content (blockquote:before) to position absolute, we can move the inside content of this element relative to this element */
+}
+
+cite {
+    font-size: 90%;
+    margin-top: 25px;
+    display: block; /* we set this element to block to it will take up a whole row */
+}
+
+cite img {
+    height: 50px;
+    border-radius: 50%;
+    margin-right: 10px;
+    margin-top: 40px;
+}
+
+blockquote:before { /* this inserts content before all the other content inside blockquote element */
+    display: block;
+    content: "\201C";
+    font-size: 500%;
+    position: absolute; /* by setting this inside content to absolute I can position it "relative" to its parent element as done below */
+    top: -5px;
+    left: -5px;
+}
+
+/*--------------------------------------*/
+/*               SIGN UP                */
+/*--------------------------------------*/
+
+.section-plans {
+    background-color: #f4f4f4;
+}
+
+.plan-box {
+    background-color: #fff;
+    border-radius: 5px;
+    width: 90%;
+    margin-left: 5%; /* this pushes each of the element 5% of the parent elements width 5% to the left 
+                    and the width of the element takes up 90% of the parent elements width and the remaining 5% of the parent
+                     elements width is automatically given to the right margin of the element */
+    box-shadow: 7px 7px 5px rgb(116, 113, 113); /* go to w3schools for this as its hard to explain */
+}
+
+.plan-box div {
+    padding: 15px;
+    border-bottom: 1px solid #4b4646;
+}
+
+.plan-box div:last-child { /* this is accessing the last div inside the plan-box element  */
+    text-align: center; /* the buttons that we are centering are still text */
+}
+
+.plan-box div:first-child {
+    background-color: rgb(245, 239, 239);
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+
+}
+
+.plan-price {
+    font-size: 300%;
+    margin-bottom: 10px;
+    font-weight: 100;
+    color: #e67e22;
+}
+
+.plan-price span {
+    font-size: 30%;
+    font-weight: 300;
+    color: #e67e22;
+}
+
+.price-per-meal {
+    font-size: 95%;
+}
+
+.plan-box ul {
+    list-style: none;
+}
+
+.plan-box ul li {
+    padding: 5px 0;
+}
+
+/*----------------------------------*/
+/*                FORM              */
+/*----------------------------------*/
+
+.contact-form {
+    width: 60%;
+    margin: 0 auto;
+}
+
+input[type=text], input[type=email], select, textarea {  /* using input[type=text], input[type=email], we are telling the document that */
+    padding: 7px;                                        /* for the input elements that have its type equal to text and email, the following */
+    width: 100%;                                         /* css will apply to them */
+    border-radius: 3px;
+}
+
+textarea {
+    height: 100px;
+}
+
+input[type=checkbox] {
+    margin: 10px 5px 10px 0;
+}
+
+*:focus {outline:none;}  /* when you click on the boxs for input google chrome puts a blue border around the element, thus this stops that */           
+                         /* from happening */
+                         /* the start means that we are referencing everything and the :focus selector means when the element is clicked on */
+                         /* or any other means of bringing attention to the element*/
+
+/*-------------------------------------*/
+/*               FOOTER                */
+/*-------------------------------------*/
+
+
+footer {
+    background-color: #333;
+}
+
+.footer-nav {
+    list-style: none;
+    float: left;
+}
+
+.social-links {
+    list-style: none;
+    float: right
+}
+
+.footer-nav li, .social-links li {
+    display: inline-block;
+    margin: 20px;
+}
+
+.footer-nav li:last-child, .social-links li:last-child {
+    margin-right: 0;
+}
+
+.footer-nav li a, 
+.social-links li a .icon-small {
+    color: #e67e22;
+    text-decoration: none;
+    padding-bottom: 1px;
+    border: none;
+    transition: color 0.2s;
+}
+
+.footer-nav li a:active, 
+.social-links li a .icon-small:active,
+.footer-nav li a:hover, 
+.social-links li a .icon-small:hover {
+    color: #888;
+}
+
+#facebook:hover, #tumbler:hover,
+#google:hover, #instagram:hover,
+#twitter:hover {
+    color: white;
+}
+
+#facebook {
+    color: #3b5998;
+    height: 30px;
+}
+
+#tumbler {
+    color: #34526f;
+    height: 30px;
+}
+
+#google {
+    color: red;
+    height: 30px;
+}
+
+#instagram {
+    color: greenyellow;
+    height: 30px;
+}
+
+#twitter {
+    color: #38A1F3;
+    height: 30px;
+}
+
+footer p {
+    text-align: center;
+    color: #888;
+    font-size: 90%;
+    margin: 17px 0;
+}
